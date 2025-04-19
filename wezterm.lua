@@ -183,4 +183,14 @@ wezterm.on("update-status", function(window, pane)
   }))
 end)
 
+if os_name == "Windows" then
+    config.default_prog = {
+        'Arch.exe',
+    }
+
+    config.default_cwd = [[\\wsl$\Arch\home\yugms]]
+elseif os_name == "Linux" then
+    config.default_cwd = get_home()
+end
+
 return config
