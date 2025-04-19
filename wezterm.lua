@@ -19,6 +19,9 @@ font_rules = {
     },
 }
 
+config.initial_rows = 24
+config.initial_cols = 100
+
 config.use_fancy_tab_bar = true
 config.colors = theme.colors()
 config.window_frame = {
