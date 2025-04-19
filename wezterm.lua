@@ -5,7 +5,7 @@ local theme = wezterm.plugin.require('https://github.com/neapsix/wezterm').moon 
 local config = {}
 if wezterm.config_builder then config = wezterm.config_builder() end
 
-config.font = wezterm.font("Cartograph CF", {weight="Bold", stretch="Normal", style="Normal", features = { "+ss02" }})
+config.font = wezterm.font("Cartograph CF", {weight="Bold", stretch="Normal", style="Normal"})
 font_rules = {
     {
       intensity = "Bold",
