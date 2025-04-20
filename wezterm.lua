@@ -5,17 +5,17 @@ local theme = wezterm.plugin.require('https://github.com/neapsix/wezterm').moon 
 local config = {}
 if wezterm.config_builder then config = wezterm.config_builder() end
 
-config.font = wezterm.font("Cartograph CF", {weight="Bold", stretch="Normal", style="Normal"})
+config.font = wezterm.font("Cartograph CF Nerd Font", {weight="Bold", stretch="Normal", style="Normal"})
 font_rules = {
     {
       intensity = "Bold",
       italic = false,
-      font = wezterm.font("Cartograph CF", { weight = "Black", stretch="Normal", style="Normal" }),
+      font = wezterm.font("Cartograph CF Nerd Font", { weight = "Black", stretch="Normal", style="Normal" }),
     },
     {
       intensity = "Bold",
       italic = true,
-      font = wezterm.font("Cartograph CF", {weight="Black", stretch="Normal", style="Normal"}),
+      font = wezterm.font("Cartograph CF Nerd Font", {weight="Black", stretch="Normal", style="Normal"}),
     },
 }
 
@@ -28,7 +28,7 @@ config.window_frame = {
     active_titlebar_bg = "#232136",
     inactive_titlebar_bg = "#232136",
     font_size = 10,
-    font = wezterm.font("Cartograph CF", {weight="Black", stretch="Normal", style="Normal"})
+    font = wezterm.font("Cartograph CF Nerd Font", {weight="Black", stretch="Normal", style="Normal"})
 }
 config.font_size = 10
 config.window_decorations = "RESIZE"
