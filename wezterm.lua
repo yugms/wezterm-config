@@ -27,10 +27,10 @@ config.colors = theme.colors()
 config.window_frame = {
     active_titlebar_bg = "#232136",
     inactive_titlebar_bg = "#232136",
-    font_size = 10,
+    font_size = 15,
     font = wezterm.font("Cartograph CF Nerd Font", {weight="Black", stretch="Normal", style="Normal"})
 }
-config.font_size = 10
+config.font_size = 15
 config.window_decorations = "RESIZE"
 config.status_update_interval = 1000
 config.inactive_pane_hsb = {
@@ -38,6 +38,14 @@ config.inactive_pane_hsb = {
   brightness = 0.6
 }
 
+if os_name == "Windows" then
+    config.default_prog = {
+        'Arch.exe',
+    }
+    config.default_cwd = [[\\wsl$\Arch\home\yugms]]
+elseif os_name == "Linux" then
+    config.default_cwd = get_home()
+end
 -- keybindings
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
@@ -186,14 +194,5 @@ wezterm.on("update-status", function(window, pane)
   }))
 end)
 
-if os_name == "Windows" then
-    config.default_prog = {
-        'Arch.exe',
-    }
-
-    config.default_cwd = [[\\wsl$\Arch\home\yugms]]
-elseif os_name == "Linux" then
-    config.default_cwd = get_home()
-end
 
 return config
