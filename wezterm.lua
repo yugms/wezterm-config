@@ -5,17 +5,26 @@ local theme = wezterm.plugin.require('https://github.com/neapsix/wezterm').moon 
 local config = {}
 if wezterm.config_builder then config = wezterm.config_builder() end
 
-config.font = wezterm.font("Cartograph CF Nerd Font", {weight="Bold", stretch="Normal", style="Normal"})
+if os_name == "Windows" then
+    config.default_prog = {
+        'Arch.exe',
+    }
+    config.default_cwd = [[\\wsl$\Arch\home\yugms]]
+elseif os_name == "Linux" then
+    config.default_cwd = get_home()
+end
+
+config.font = wezterm.font("CartographCF Nerd Font", {weight="Bold", stretch="Normal", style="Normal"})
 font_rules = {
     {
       intensity = "Bold",
       italic = false,
-      font = wezterm.font("Cartograph CF Nerd Font", { weight = "Black", stretch="Normal", style="Normal" }),
+      font = wezterm.font("CartographCF Nerd Font", { weight = "Black", stretch="Normal", style="Normal" }),
     },
     {
       intensity = "Bold",
       italic = true,
-      font = wezterm.font("Cartograph CF Nerd Font", {weight="Black", stretch="Normal", style="Normal"}),
+      font = wezterm.font("CartographCF Nerd Font", {weight="Black", stretch="Normal", style="Normal"}),
     },
 }
 
@@ -27,10 +36,10 @@ config.colors = theme.colors()
 config.window_frame = {
     active_titlebar_bg = "#232136",
     inactive_titlebar_bg = "#232136",
-    font_size = 15,
-    font = wezterm.font("Cartograph CF Nerd Font", {weight="Black", stretch="Normal", style="Normal"})
+    font_size = 10,
+    font = wezterm.font("CartographCF Nerd Font", {weight="Black", stretch="Normal", style="Normal"})
 }
-config.font_size = 15
+config.font_size = 10
 config.window_decorations = "RESIZE"
 config.status_update_interval = 1000
 config.inactive_pane_hsb = {
@@ -38,14 +47,6 @@ config.inactive_pane_hsb = {
   brightness = 0.6
 }
 
-if os_name == "Windows" then
-    config.default_prog = {
-        'Arch.exe',
-    }
-    config.default_cwd = [[\\wsl$\Arch\home\yugms]]
-elseif os_name == "Linux" then
-    config.default_cwd = get_home()
-end
 -- keybindings
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
@@ -82,31 +83,20 @@ config.keys = {
 
     -- rename tab
     {
-    key = 'e',
-    mods = "LEADER",
-    action = act.PromptInputLine {
-        description = 'Enter new name for tab',
-        action = wezterm.action_callback(function(window, pane, line)
-        -- line will be `nil` if they hit escape without entering anything
-        -- An empty string if they just hit enter
-        -- Or the actual line of text they wrote
-        if line then
-          window:active_tab():set_title(line)
-        end
+        key = 'e',
+        mods = "LEADER",
+        action = act.PromptInputLine {
+            description = 'Enter new name for tab',
+            action = wezterm.action_callback(function(window, pane, line)
+            -- line will be `nil` if they hit escape without entering anything
+            -- An empty string if they just hit enter
+            -- Or the actual line of text they wrote
+            if line then
+                window:active_tab():set_title(line)
+            end
         end),
+        },
     },
-},
-
-{
-key = "c",
-mods = "CTRL|SHIFT",
-action = wezterm.action.CopyTo("ClipboardAndPrimarySelection"),
-},
-{
-key = "v",
-mods = "CTRL|SHIFT",
-action = wezterm.action.PasteFrom("Clipboard"),
-},
 }
 -- I can use the tab navigator (LDR t), but I also want to quickly navigate tabs with index
 for i = 1, 9 do
