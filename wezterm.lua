@@ -5,14 +5,7 @@ local theme = wezterm.plugin.require('https://github.com/neapsix/wezterm').moon 
 local config = {}
 if wezterm.config_builder then config = wezterm.config_builder() end
 
-if os_name == "Windows" then
-    config.default_prog = {
-        'Arch.exe',
-    }
-    config.default_cwd = [[\\wsl$\Arch\home\yugms]]
-elseif os_name == "Linux" then
-    config.default_cwd = get_home()
-end
+config.default_domain = 'WSL:Arch'
 
 config.font = wezterm.font("CartographCF Nerd Font", {weight="Bold", stretch="Normal", style="Normal"})
 font_rules = {
