@@ -5,7 +5,7 @@ local theme = wezterm.plugin.require('https://github.com/neapsix/wezterm').moon 
 local config = {}
 if wezterm.config_builder then config = wezterm.config_builder() end
 
-config.default_domain = 'WSL:Arch'
+config.default_prog = { "Arch.exe" }
 
 config.font = wezterm.font("CartographCF Nerd Font", {weight="Bold", stretch="Normal", style="Normal"})
 font_rules = {
